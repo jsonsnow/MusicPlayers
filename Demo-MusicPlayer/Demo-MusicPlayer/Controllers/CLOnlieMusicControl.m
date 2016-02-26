@@ -30,7 +30,7 @@
 #define STATUES_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height
 #define NAV_HEINGT     [[UINavigationController alloc] init].navigationBar.frame.size.height
 
-static CLMusicOnBaiDuIcon *_onlieMuisc;
+
 @interface CLOnlieMusicControl ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) FSAudioStream *onliePlayer;
 @property (weak,  nonatomic) IBOutlet UIButton *playOrPauseButton;
@@ -48,6 +48,7 @@ static CLMusicOnBaiDuIcon *_onlieMuisc;
 @property (nonatomic,assign) NSInteger currentIndex;
 @property (nonatomic,strong) CADisplayLink *lrcTimer;
 @property (nonatomic,assign) NSTimeInterval currentTime;
+@property (nonatomic,weak) CLMusicOnBaiDuIcon * onlieMuisc;
 
 
 @end
@@ -95,6 +96,8 @@ static CLMusicOnBaiDuIcon *_onlieMuisc;
     
     [self.currentTimer invalidate];
     [self.lrcTimer invalidate];
+    self.currentTimer = nil ;
+    self.lrcTimer = nil;
 }
 
 
@@ -378,8 +381,14 @@ static CLMusicOnBaiDuIcon *_onlieMuisc;
 #pragma mark---专辑封面
 -(void)setAlbumImageView{
     self.navigationItem.title=_onlieMuisc.songName;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:_onlieMuisc.songPicBig]];
+    
+    if (![_onlieMuisc.songPicBig isKindOfClass:[NSNull class]]) {
+        
+        [self.iconView sd_setImageWithURL:[NSURL URLWithString:_onlieMuisc.songPicBig]];
 
+        
+    }
+   
 }
 
 -(UIImage *)getCircularImage:(UIImage *)image andRect:(CGRect)rect{

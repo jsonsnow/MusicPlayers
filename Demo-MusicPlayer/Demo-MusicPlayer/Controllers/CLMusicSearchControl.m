@@ -277,10 +277,12 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
     cell.textLabel.text=onelin.songName;
     cell.detailTextLabel.text=onelin.artistName;
     CGRect rect=CGRectMake(0, 0, 60, 60);
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:onelin.songPicSmall]
-                      placeholderImage:[self getCircularImage:[UIImage imageNamed:@"008"] andRect:rect]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    if (![onelin.songPicSmall isKindOfClass:[NSNull class]]) {
         
-    }];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:onelin.songPicSmall]
+                          placeholderImage:[self getCircularImage:[UIImage imageNamed:@"008"] andRect:rect]  completed:nil];
+        
+    }
     
     return cell;
     
