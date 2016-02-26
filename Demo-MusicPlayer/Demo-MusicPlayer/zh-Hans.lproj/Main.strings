@@ -1,0 +1,30 @@
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "2hd-2O-Bwh"; */
+"2hd-2O-Bwh.title" = "Root View Controller";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "5w0-1s-ico"; */
+"5w0-1s-ico.title" = "Root View Controller";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "BJg-r6-ylO"; */
+"BJg-r6-ylO.text" = "Subtitle";
+
+/* Class = "UITabBarItem"; title = "本地音乐"; ObjectID = "HIN-hj-InI"; */
+"HIN-hj-InI.title" = "本地音乐";
+
+/* Class = "UINavigationItem"; title = "我的音乐"; ObjectID = "KX0-0d-O5i"; */
+"KX0-0d-O5i.title" = "我的音乐";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Mol-lw-RCj"; */
+"Mol-lw-RCj.text" = "Title";
+
+/* Class = "UITabBarItem"; title = "在线音乐"; ObjectID = "SZX-CM-rZx"; */
+"SZX-CM-rZx.title" = "在线音乐";
+
+/* Class = "UITabBarItem"; title = "MV"; ObjectID = "bpd-ev-Oqh"; */
+"bpd-ev-Oqh.title" = "MV";
+
+/* Class = "UILabel"; text = "本地音乐"; ObjectID = "fe7-Oc-G7i"; */
+"fe7-Oc-G7i.text" = "本地音乐";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "tXF-oK-RTP"; */
+"tXF-oK-RTP.text" = "Title";
