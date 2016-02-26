@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentDownloadMusic;
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;
 @property (weak, nonatomic) IBOutlet UIProgressView *preogress;
+@property (weak, nonatomic) IBOutlet UILabel *progeressLabel;
 
 @end

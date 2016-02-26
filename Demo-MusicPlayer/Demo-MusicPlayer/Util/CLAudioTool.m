@@ -336,6 +336,7 @@ static NSMutableDictionary *_onleMusicDic;
             if (mySelf.num==0) {
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"playError" object:mySelf userInfo:@{@"description":description}];
+                
                 mySelf.num=1;
                 
             }

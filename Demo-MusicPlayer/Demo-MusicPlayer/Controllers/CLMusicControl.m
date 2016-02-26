@@ -221,6 +221,9 @@ const CGFloat weight=70;
     
 }
 
-
+-(void)dealloc{
+    
+    NSLog(@"%@销毁",self);
+}
 
 @end

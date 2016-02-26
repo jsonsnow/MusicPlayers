@@ -115,8 +115,13 @@ static CLMusicGroupTool *_manager;
             continue;
         }
         int index= c-97;
-        CLMusicGroup *group = arrays[index];
-        [group.musicsArray addObject:music];
+        
+        if (0<index && index< 26) {
+            
+            CLMusicGroup *group = arrays[index];
+            [group.musicsArray addObject:music];
+        }
+        
         
     }
     
@@ -138,8 +143,12 @@ static CLMusicGroupTool *_manager;
         
     }
     int index= c-97;
-    CLMusicGroup *group = _groupArray[index];
-    [group.musicsArray addObject:music];
+    if (0<index && index< 26) {
+        
+        CLMusicGroup *group = _groupArray[index];
+        [group.musicsArray addObject:music];
+    }
+    
 
     
 }
@@ -158,10 +167,14 @@ static CLMusicGroupTool *_manager;
         
     }
     int index= c-97;
-    CLMusicGroup *group = _recentPlayArray[index];
-    [[CLMuiscTool musicManager] addMusicForRecentPlay:music];
-    [group.musicsArray addObject:music];
-
+    
+    if (0<index && index< 26) {
+        
+        CLMusicGroup *group = _recentPlayArray[index];
+        [[CLMuiscTool musicManager] addMusicForRecentPlay:music];
+        [group.musicsArray addObject:music];
+    }
+    
     
 }
 

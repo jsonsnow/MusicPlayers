@@ -978,7 +978,7 @@ static CLMuiscTool *_manger;
    
     [self updateMessageForMusic:music];
     
-    if (![self.recentPlayArray containsObject:music]) {
+    if (![self.recentPlayArray containsObject:music]&& music) {
         
           [self.recentPlayArray addObject:music];
     }

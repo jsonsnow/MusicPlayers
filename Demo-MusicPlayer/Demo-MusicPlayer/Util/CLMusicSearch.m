@@ -286,11 +286,6 @@ static CLMusicSearch *_manager;
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        NSLog(@"%@",[NSThread currentThread]);
-    });
     
     NSString *keyString;
     NSArray *allKey = [_taskDic allKeys];
@@ -302,7 +297,7 @@ static CLMusicSearch *_manager;
             break ;
         }
     }
-    
+
     [self.delegate downloadTaskProgress:self andEd:totalBytesWritten+[self.resumeDataDic[keyString] intValue] andKeyString:keyString andAll:totalBytesExpectedToWrite withDownTask:downloadTask];
     
     
@@ -331,6 +326,11 @@ static CLMusicSearch *_manager;
         if (self.keyString.length>0) {
             
               [_taskDic removeObjectForKey:self.keyString];
+            
+            if ([self.keyString containsString:@"?"]) {
+                
+                [_resumeDataDic removeObjectForKey:self.keyString];
+            }
             
         }
         
@@ -477,9 +477,15 @@ static CLMusicSearch *_manager;
 //    _taskDic[music.songLink] = task;
 //    [task resume];
     
+    NSString *urlString = music.songLink;
+    NSRange range = [urlString rangeOfString:@"?"];
+    if (range.location) {
+        
+        urlString = [urlString substringToIndex:range.location];
+        
+    }
     
-    
-    NSURL  *url= [NSURL URLWithString:music.songLink];
+    NSURL  *url= [NSURL URLWithString:urlString];
     int64_t currentLenth = [self.resumeDataDic[music.songLink] intValue];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     NSString *resumStr = [NSString stringWithFormat:@"bytes=%lld-",currentLenth];
@@ -490,7 +496,7 @@ static CLMusicSearch *_manager;
                              configuration delegate:self delegateQueue:[NSOperationQueue new]];
     NSURLSessionDownloadTask *task=[session downloadTaskWithRequest:request];
     [task resume];
-    self.taskDic[music.songLink] = task;
+    self.taskDic[urlString] = task;
 
     
 }

@@ -112,6 +112,7 @@ static NSString *identifer = @"cell";
     dispatch_async(dispatch_get_main_queue(), ^{
         
         cell.preogress.progress = 1.0*downloadedLength/expectedLength;
+        cell.progeressLabel.text = [NSString stringWithFormat:@"%4.2lf",1.0*downloadedLength/expectedLength*100];
     });
     
     

@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在下载:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ors-2H-V1v">
-                        <rect key="frame" x="8" y="22" width="259" height="21"/>
+                        <rect key="frame" x="8" y="20" width="259" height="22"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,28 +33,63 @@
                         <state key="selected" backgroundImage="lockscreen_play"/>
                     </button>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oO9-sv-xpA">
-                        <rect key="frame" x="13" y="10" width="299" height="2"/>
+                        <rect key="frame" x="13" y="10" width="272" height="2"/>
                         <animations/>
                     </progressView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-X8-Zc5">
+                        <rect key="frame" x="290" y="0.0" width="30" height="15"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="HJX-cZ-LBl"/>
+                            <constraint firstAttribute="width" constant="30" id="dFz-lb-AI0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="FUM-X8-Zc5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0ZQ-tN-rwq"/>
+                    <constraint firstAttribute="bottom" secondItem="ors-2H-V1v" secondAttribute="bottom" id="3ad-M9-WIf"/>
                     <constraint firstItem="ors-2H-V1v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="70m-a8-aFy"/>
                     <constraint firstItem="TLZ-eV-C1C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="9mJ-1X-KEi"/>
                     <constraint firstAttribute="trailing" secondItem="oO9-sv-xpA" secondAttribute="trailing" constant="8" id="P8R-FZ-aXY"/>
                     <constraint firstItem="oO9-sv-xpA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="R5Y-jJ-195"/>
+                    <constraint firstAttribute="trailing" secondItem="FUM-X8-Zc5" secondAttribute="trailing" id="SnR-fK-cBJ"/>
+                    <constraint firstAttribute="trailing" secondItem="oO9-sv-xpA" secondAttribute="trailing" constant="35" id="U4o-UV-2pY"/>
+                    <constraint firstItem="FUM-X8-Zc5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="V9X-wj-3Ee"/>
+                    <constraint firstItem="FUM-X8-Zc5" firstAttribute="top" secondItem="oO9-sv-xpA" secondAttribute="bottom" constant="1" id="YQj-a1-ODN"/>
+                    <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="FUM-X8-Zc5" secondAttribute="bottom" constant="1" id="cJj-Tl-1IR"/>
                     <constraint firstItem="TLZ-eV-C1C" firstAttribute="top" secondItem="oO9-sv-xpA" secondAttribute="bottom" constant="3" id="edJ-gA-TIB"/>
-                    <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="hSv-do-jBI"/>
+                    <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="hSv-do-jBI"/>
+                    <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="FUM-X8-Zc5" secondAttribute="bottom" constant="1" id="jdC-o0-Dyk"/>
+                    <constraint firstAttribute="trailing" secondItem="FUM-X8-Zc5" secondAttribute="trailing" id="rEu-Ji-FCS"/>
                     <constraint firstItem="oO9-sv-xpA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="sMH-cW-25V"/>
+                    <constraint firstItem="TLZ-eV-C1C" firstAttribute="leading" secondItem="FUM-X8-Zc5" secondAttribute="trailing" constant="232" id="spt-53-Ui2"/>
+                    <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="oO9-sv-xpA" secondAttribute="bottom" constant="8" id="vDA-mP-5So"/>
                     <constraint firstItem="TLZ-eV-C1C" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="xmY-6x-RWF"/>
                     <constraint firstItem="TLZ-eV-C1C" firstAttribute="leading" secondItem="ors-2H-V1v" secondAttribute="trailing" constant="10" id="yyl-OR-jDU"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="P8R-FZ-aXY"/>
+                        <exclude reference="cJj-Tl-1IR"/>
+                        <exclude reference="hSv-do-jBI"/>
+                        <exclude reference="jdC-o0-Dyk"/>
+                        <exclude reference="spt-53-Ui2"/>
+                        <exclude reference="V9X-wj-3Ee"/>
+                        <exclude reference="YQj-a1-ODN"/>
+                        <exclude reference="rEu-Ji-FCS"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
                 <outlet property="currentDownloadMusic" destination="ors-2H-V1v" id="r8S-Vx-MQa"/>
                 <outlet property="downloadButton" destination="TLZ-eV-C1C" id="1mL-rn-D6e"/>
                 <outlet property="preogress" destination="oO9-sv-xpA" id="oN5-Zv-FIT"/>
+                <outlet property="progeressLabel" destination="FUM-X8-Zc5" id="0Yi-dn-P5g"/>
             </connections>
             <point key="canvasLocation" x="139" y="361.5"/>
         </tableViewCell>
