@@ -33,15 +33,15 @@
                         <state key="selected" backgroundImage="lockscreen_play"/>
                     </button>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oO9-sv-xpA">
-                        <rect key="frame" x="13" y="10" width="272" height="2"/>
+                        <rect key="frame" x="13" y="10" width="267" height="2"/>
                         <animations/>
                     </progressView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-X8-Zc5">
-                        <rect key="frame" x="290" y="0.0" width="30" height="15"/>
+                        <rect key="frame" x="280" y="0.0" width="40" height="15"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="HJX-cZ-LBl"/>
-                            <constraint firstAttribute="width" constant="30" id="dFz-lb-AI0"/>
+                            <constraint firstAttribute="width" constant="40" id="dFz-lb-AI0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -57,7 +57,7 @@
                     <constraint firstAttribute="trailing" secondItem="oO9-sv-xpA" secondAttribute="trailing" constant="8" id="P8R-FZ-aXY"/>
                     <constraint firstItem="oO9-sv-xpA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="R5Y-jJ-195"/>
                     <constraint firstAttribute="trailing" secondItem="FUM-X8-Zc5" secondAttribute="trailing" id="SnR-fK-cBJ"/>
-                    <constraint firstAttribute="trailing" secondItem="oO9-sv-xpA" secondAttribute="trailing" constant="35" id="U4o-UV-2pY"/>
+                    <constraint firstAttribute="trailing" secondItem="oO9-sv-xpA" secondAttribute="trailing" constant="40" id="U4o-UV-2pY"/>
                     <constraint firstItem="FUM-X8-Zc5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="V9X-wj-3Ee"/>
                     <constraint firstItem="FUM-X8-Zc5" firstAttribute="top" secondItem="oO9-sv-xpA" secondAttribute="bottom" constant="1" id="YQj-a1-ODN"/>
                     <constraint firstItem="ors-2H-V1v" firstAttribute="top" secondItem="FUM-X8-Zc5" secondAttribute="bottom" constant="1" id="cJj-Tl-1IR"/>

@@ -166,7 +166,7 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
 }
 -(void)seatherMusic:(NSString *)string{
     
-    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在搜索"];
+  [MBProgressHUD showMessage:@"正在搜索" toView:self.view];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -189,7 +189,6 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
                 [[CLMusicSearch searchManager] getMusicList:musicPathByID successHandler:^(id data, id response) {
                     
                     NSAssert([NSThread isMainThread], @"updata ui must in main thread");
-                    [hud hide:YES];
                     NSData *recData=data;
                     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recData options:0 error:nil];
                     self.showArray=[[CLMuiscTool  musicManager] onlineMusciByMusicID:dic];
@@ -201,7 +200,7 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
                 } andFailHandle:^(id response, NSError *error) {
                     
                     NSAssert([NSThread isMainThread], @"updata ui must in main thread");
-                    [MBProgressHUD showError:@"搜索错误"];
+                    [MBProgressHUD showMessage:@"搜索错误" toView:self.view];
                     NSLog(@"%@",error.userInfo);
                     self.onSearch=NO;
                     NSLog(@"ID搜索粗无");
@@ -216,7 +215,7 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
             NSLog(@"%@",error.userInfo);
             self.onSearch=NO;
             NSLog(@"搜索错误");
-            [MBProgressHUD showError:@"搜索错误"];
+           [MBProgressHUD showMessage:@"搜索错误" toView:self.view];
             
         }];
         

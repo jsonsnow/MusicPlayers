@@ -7,9 +7,26 @@
 //
 
 #import "MBProgressHUD+KR.h"
+#import <objc/runtime.h>
 
 @implementation MBProgressHUD (KR)
 #pragma mark 显示信息
++(void)load{
+    
+    [super load];
+    Method fromMethod = class_getClassMethod([self class], @selector(showMessage:));
+    Method toMethod   = class_getClassMethod([self class], @selector(showMyMessage:andView:));
+    method_exchangeImplementations(fromMethod, toMethod);
+    
+}
+
++(void)showMyMessage:(NSString *)message andView:(UIView *)view{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.labelText = message;
+    [hud hide:YES afterDelay:1.2];
+    
+}
 + (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
 {
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
@@ -47,7 +64,8 @@
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+   
+    [hud hide:YES afterDelay:1.2];
     return hud;
 }
 

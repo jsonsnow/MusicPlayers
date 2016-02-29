@@ -36,6 +36,11 @@
 //    tab.viewControllers=@[myMusic,playMuisc,setMusic];
 //    self.window.rootViewController=tab;
 //    [self.window makeKeyAndVisible];
+    NSDictionary *arrtributeDic = @{NSFontAttributeName:[UIFont systemFontOfSize:17],
+                                    
+                                    };
+    [[UITabBarItem appearance] setTitleTextAttributes:arrtributeDic forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:arrtributeDic forState:UIControlStateSelected];
     
     return YES;
     

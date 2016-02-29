@@ -82,7 +82,8 @@
     
 }
 -(void)getData{
-    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
+    
+   [MBProgressHUD showMessage:@"正在加载" toView:self.view];
     
     [[CLBoradListManager listManager] getListCompleteHandle:^(NSArray *array) {
         
@@ -93,7 +94,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
            
-             [hud hide:YES];
+            
              [self.tableView reloadData];
             
         });
@@ -108,7 +109,7 @@
         self.boardListArray = haveData;
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [hud hide:YES];
+            
             [self.tableView reloadData];
             
         });

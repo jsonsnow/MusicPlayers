@@ -348,10 +348,10 @@
             </objects>
             <point key="canvasLocation" x="-1164" y="-589"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Setting Contro-->
         <scene sceneID="rMX-Gp-OSU">
             <objects>
-                <tableViewController id="EsS-Jz-ISn" sceneMemberID="viewController">
+                <tableViewController id="EsS-Jz-ISn" customClass="CLSettingContro" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKK-Ot-rM5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -19,7 +19,7 @@
     
     if (self =[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         
-        self.title=@"设置";
+        self.tabBarItem.title=@"设置";
         
     }
     
@@ -27,6 +27,26 @@
     return self;
     
     
+}
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super initWithCoder:aDecoder]) {
+        
+        //self.tabBarItem.title=@"设置";
+        [self.tabBarItem setTitle:@"设置"];
+    }
+    
+    return self ;
+}
+-(instancetype)init{
+    
+    if (self = [super init]) {
+        
+        self.tabBarItem.title=@"设置";
+    }
+    
+    
+    return self ;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

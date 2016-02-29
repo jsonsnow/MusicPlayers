@@ -40,7 +40,7 @@ const static NSString *baseMusicDetail=@"http://ting.baidu.com/data/music/links?
     if (self.list!=nil) {
         
         self.navigationItem.title=self.list.name;
-        MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
+        MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加紧" toView:self.view];
         [[CLMuiscTool musicManager] getMusicByArtistAndBoardList:nil andBoardList:self.list andLimits:self.limits andResultBlock:^(CLMusicOnBaiDuIcon *muisc) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -68,7 +68,7 @@ const static NSString *baseMusicDetail=@"http://ting.baidu.com/data/music/links?
         
     } else {
         
-        MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
+       MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加紧" toView:self.view];
        [[CLMuiscTool musicManager] getMusicByArtistAndBoardList:self.artist andBoardList:nil andLimits:self.limits andResultBlock:^(CLMusicOnBaiDuIcon *muisc) {
            
           
