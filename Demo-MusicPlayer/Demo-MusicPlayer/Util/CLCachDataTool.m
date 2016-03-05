@@ -20,14 +20,15 @@
 //缓存歌词和存到本地
 +(void)addLrcForCach:(NSArray *)lrc andURL:(NSURL *)url andID:(NSString *)ID{
     
-    [CLCachData sharedCachDataManager].lrcDic[ID] = lrc;
+  
     NSString *strPath=url.path;
-    NSFileHandle *readHandle = [NSFileHandle fileHandleForReadingAtPath:strPath];
-    NSData *data=[readHandle readDataToEndOfFile];
-    [data writeToFile:[self lrcPathwith:(NSString *)ID] atomically:YES];
-    [readHandle closeFile];
-    data = nil;
-
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    [manager copyItemAtPath:strPath toPath:[self lrcPathwith:ID] error:&error];
+    if (error) {
+        
+        NSLog(@"copy error:%@",error.userInfo);
+    }
     
     
 }
@@ -44,7 +45,7 @@
         [manager createDirectoryAtPath:lrcPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    lrcPath = [NSString stringWithFormat:@"/%@.lrc",ID];
+    lrcPath = [NSString stringWithFormat:@"%@/%@.lrc",lrcPath,ID];
     
     return lrcPath;
 }
@@ -52,17 +53,14 @@
 
 #pragma mark --歌词获取
 +(NSArray *)getLrcForCachWith:(NSString *)ID{
+   
     
-    NSArray *array = [CLCachData sharedCachDataManager].lrcDic[ID];
-    
-    if (array.count==0) {
-        
-       NSString *lrcPath = [[self lrcPath] stringByAppendingFormat:@"/%@.lrc",ID];
-        NSURL *url = [NSURL fileURLWithPath:lrcPath];
-        array = [CLLyric lrcLinesWithFileName:url];
-    }
   
-    return array;
+        
+       NSString *lrcPath = [self lrcPathwith:ID];
+       NSURL *url = [NSURL fileURLWithPath:lrcPath];
+       NSArray * array = [CLLyric lrcLinesWithFileName:url];
+       return array;
 }
 
 +(NSString *)lrcPath{

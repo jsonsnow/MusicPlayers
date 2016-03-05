@@ -95,6 +95,7 @@
 #pragma mark --界面消失时候至onlinemusic和onlinePlayer为nil不然会影响内存的释放
 -(void)viewWillDisappear:(BOOL)animated{
     
+    [super viewWillDisappear:animated];
     [self.currentTimer invalidate];
     [self.lrcTimer invalidate];
     self.currentTimer = nil ;
@@ -270,13 +271,14 @@
 //播放下一首
 - (IBAction)playNextMusic {
     
-    
+     self.onliePlayer = nil;
     [[CLAudioTool sharedAudiManager] stopAudioWithOnlineString:_onlieMuisc.songLink];
-    
+   
     
     _onlieMuisc=[CLMuiscTool getOnlineCurrentMusic]?[CLMuiscTool nextOnlineMusic:_onlieMuisc]:[CLMuiscTool nextMusic:_onlieMuisc];
     [self setAlbumImageView];
     [self downloadLrc];
+    
     [self play:_onlieMuisc.songLink];
     
 }
@@ -284,10 +286,13 @@
 //播放上一首
 - (IBAction)playForwoedMusic:(UIButton *)sender {
     
+     self.onliePlayer = nil;
     [[CLAudioTool sharedAudiManager] stopAudioWithOnlineString:_onlieMuisc.songLink];
+   
     _onlieMuisc=[CLMuiscTool getOnlineCurrentMusic]?[CLMuiscTool nextOnlineMusic:_onlieMuisc]:[CLMuiscTool nextMusic:_onlieMuisc];
     [self setAlbumImageView];
     [self downloadLrc];
+ 
     [self play:_onlieMuisc.songLink];
     
 }

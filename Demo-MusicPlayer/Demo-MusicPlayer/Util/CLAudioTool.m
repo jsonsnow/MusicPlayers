@@ -168,7 +168,9 @@ static NSMutableDictionary *_onleMusicDic;
     
     _onlinePlay.onCompletion = ^{
         
-        [mySelf playModel:NO];
+        
+       BOOL isLocal = [CLMuiscTool getCurrentMusic]?YES:NO;
+        [mySelf playModel:isLocal];
         
     };
     self.onlinePlay.onFailure=^(FSAudioStreamError error,NSString *description){
@@ -208,15 +210,15 @@ static NSMutableDictionary *_onleMusicDic;
 -(void)pauseAudioWithOnlineString:(NSString *)fileName{
     
     
-    FSAudioStream *onlinePlayer=_onleMusicDic[fileName];
     
-    if (onlinePlayer==nil) {
+    
+    if (_onlinePlay==nil) {
         
         return;
     }
     
     
-        [onlinePlayer pause];
+        [_onlinePlay pause];
  
     
     
@@ -225,17 +227,17 @@ static NSMutableDictionary *_onleMusicDic;
 -(void)stopAudioWithOnlineString:(NSString *)fileName{
     
     
-    FSAudioStream *onlinePlayer=_onleMusicDic[fileName];
+    //FSAudioStream *onlinePlayer=_onleMusicDic[fileName];
     
-    if (onlinePlayer==nil) {
+    if (_onlinePlay==nil) {
         
         return;
     }
 
-    [onlinePlayer stop];
-  
+    [_onlinePlay stop];
+
     [_onleMusicDic removeObjectForKey:fileName];
-      onlinePlayer = nil;
+    _onlinePlay = nil;
 }
 
 #pragma mark stream delegate

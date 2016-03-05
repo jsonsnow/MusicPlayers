@@ -232,6 +232,7 @@ const static NSString *baiDuListUrl=@"http://tingapi.ting.baidu.com/v1/restserve
 
 -(void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden=NO;
 }
 

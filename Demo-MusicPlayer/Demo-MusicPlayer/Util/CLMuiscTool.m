@@ -23,7 +23,7 @@ const static NSString *baseMusicRecoUrl=@"http://tingapi.ting.baidu.com/v1/rests
 
 
 
- NSMutableArray *_muicArrayFromFile = nil;
+static NSMutableArray *_muicArrayFromFile = nil;
 static CLMusicOnBaiDuIcon *_playingMusic;
 
 
@@ -42,6 +42,7 @@ static CLMuiscTool *_manger;
 @interface CLMuiscTool ()
 @property (nonatomic,strong) NSString *musicPath;
 @property (nonatomic,strong) NSMutableArray *recentPlayArray;
+
 
 
 @end
@@ -240,7 +241,7 @@ static CLMuiscTool *_manger;
         
         index=index+1;
     }
-    [self setPlayingMusci:_searchMuiscArray[index]];
+    [self setOnlinePlayingMusci:_searchMuiscArray[index]];
     return _searchMuiscArray[index];
     
     
@@ -747,12 +748,12 @@ static CLMuiscTool *_manger;
     NSString *urlString ;
     if (artist) {
         
-         urlString = [NSString stringWithFormat:@"%@%@&limits=%ld",baseMusicRecoUrl,artist.artistid,num];
+         urlString = [NSString stringWithFormat:@"%@%@&limits=%ld",baseMusicRecoUrl,artist.artistid,(long)num];
         
     } else {
         
         
-        urlString=[NSString stringWithFormat:@"http://tingapi.ting.baidu.com/v1/restserver/ting?from=webapp_music&method=baidu.ting.billboard.billList&format=json&size=%ld&type=%d",num,[list.billboard_type intValue]];
+        urlString=[NSString stringWithFormat:@"http://tingapi.ting.baidu.com/v1/restserver/ting?from=webapp_music&method=baidu.ting.billboard.billList&format=json&size=%ld&type=%d",(long)num,[list.billboard_type intValue]];
         
     }
     

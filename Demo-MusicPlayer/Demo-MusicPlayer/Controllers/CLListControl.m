@@ -187,7 +187,7 @@ const static NSString *baseMusicDetail=@"http://ting.baidu.com/data/music/links?
             
             [self.tableView.mj_footer endRefreshing];
             NSHTTPURLResponse *res=response;
-            NSLog(@"%ld error:%@",res.statusCode,error.userInfo);
+            NSLog(@"%ld error:%@",(long)res.statusCode,error.userInfo);
             NSLog(@"榜单错误");
 
             
@@ -195,7 +195,7 @@ const static NSString *baseMusicDetail=@"http://ting.baidu.com/data/music/links?
             
              [self.tableView.mj_footer endRefreshing];
             NSHTTPURLResponse *res=response;
-            NSLog(@"%ld error:%@",res.statusCode,error.userInfo);
+            NSLog(@"%ld error:%@",(long)res.statusCode,error.userInfo);
             NSLog(@"榜单错误");
 
             

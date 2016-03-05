@@ -98,7 +98,7 @@ static NSString *identifer = @"cell";
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    NSString *headerString = [NSString stringWithFormat:@"正在下载:%ld首",self.downloadArray.count];
+    NSString *headerString = [NSString stringWithFormat:@"正在下载:%ld首",(unsigned long)self.downloadArray.count];
     return headerString;
     
 }

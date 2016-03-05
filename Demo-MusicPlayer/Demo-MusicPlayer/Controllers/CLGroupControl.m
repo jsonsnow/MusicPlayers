@@ -65,7 +65,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.lcoalMusicNum.text = [NSString stringWithFormat:
-                                           @"%ld首",[[CLMuiscTool musicManager] musicArray].count];
+                                           @"%ld首",(unsigned long)[[CLMuiscTool musicManager] musicArray].count];
                 [defaults setBool:YES forKey:@"isFirstSearch"];
                 
             });
@@ -80,12 +80,13 @@
 #pragma 首界面在出现时候刷新数据
 -(void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
     self.lcoalMusicNum.text = [NSString stringWithFormat:
-                               @"%ld首",[[CLMuiscTool musicManager] musicArray].count];
+                               @"%ld首",(unsigned long)[[CLMuiscTool musicManager] musicArray].count];
     NSArray *array = [[CLMuiscTool musicManager] getAllDownloadMusic];
-    self.downloadingMusic.text = [NSString stringWithFormat:@"%ld首音乐正在下载",array.count];
+    self.downloadingMusic.text = [NSString stringWithFormat:@"%ld首音乐正在下载",(unsigned long)array.count];
     
-    self.recentPlayMusicCount.text = [NSString stringWithFormat:@"%ld首",[[CLMuiscTool musicManager] getRecentPlayMusic].count];
+    self.recentPlayMusicCount.text = [NSString stringWithFormat:@"%ld首",(unsigned long)[[CLMuiscTool musicManager] getRecentPlayMusic].count];
     self.tabBarController.tabBar.hidden=NO;
                                   
 }
