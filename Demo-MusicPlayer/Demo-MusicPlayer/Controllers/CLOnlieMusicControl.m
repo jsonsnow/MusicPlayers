@@ -92,12 +92,15 @@
     
 }
 
+#pragma mark --界面消失时候至onlinemusic和onlinePlayer为nil不然会影响内存的释放
 -(void)viewWillDisappear:(BOOL)animated{
     
     [self.currentTimer invalidate];
     [self.lrcTimer invalidate];
     self.currentTimer = nil ;
     self.lrcTimer = nil;
+    self.onlieMuisc = nil;
+    self.onliePlayer = nil;
 }
 
 
@@ -293,6 +296,7 @@
     
 
     self.onliePlayer=[[CLAudioTool sharedAudiManager] playAudioWithOnlineString:fileName];
+    [self.onliePlayer play];
 
     self.durationLabel.text=[self changeTimeWithInterval:self.onliePlayer.duration];
     [self.currentTimeButton setTitle:[self changeTimeWithInterval:self.onliePlayer.currentTimePlayed] forState:UIControlStateNormal];

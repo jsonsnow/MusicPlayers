@@ -78,7 +78,7 @@
 
 -(NSArray *)getRecentPlayMusic;
 
--(void)addMusicForRecentPlay:(CLMusicOnBaiDuIcon *)music;
+-(BOOL)addMusicForRecentPlay:(CLMusicOnBaiDuIcon *)music;
 
 -(void)deleteMusicForRecentPlay:(CLMusicOnBaiDuIcon *)music;
 

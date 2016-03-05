@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    NSLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]);
     [self getMusicFromUserDeviec];
     self.navigationItem.title = @"我的音乐";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_search"] style:UIBarButtonItemStyleDone target:self action:@selector(searchButton:)];

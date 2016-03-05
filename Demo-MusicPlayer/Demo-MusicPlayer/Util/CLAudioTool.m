@@ -163,8 +163,28 @@ static NSMutableDictionary *_onleMusicDic;
     }
     
     _onleMusicDic[fileName]=_onlinePlay;
+    self.num = 0;
+    __weak CLAudioTool *mySelf=self;
     
+    _onlinePlay.onCompletion = ^{
         
+        [mySelf playModel:NO];
+        
+    };
+    self.onlinePlay.onFailure=^(FSAudioStreamError error,NSString *description){
+        
+        if (mySelf.num==0) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"searchPlayError" object:mySelf userInfo:@{@"description":description}];
+            mySelf.num = 1;
+        }
+        
+        
+    };
+    
+    
+    
+    
 //       onliePlayer.onCompletion=^(){
         
 //       CLMusicOnBaiDuIcon *music = [CLMuiscTool getOnlineCurrentMusic];
@@ -211,11 +231,11 @@ static NSMutableDictionary *_onleMusicDic;
         
         return;
     }
-    
-    [onlinePlayer pause];
+
     [onlinePlayer stop];
-    
+  
     [_onleMusicDic removeObjectForKey:fileName];
+      onlinePlayer = nil;
 }
 
 #pragma mark stream delegate
@@ -259,28 +279,7 @@ static NSMutableDictionary *_onleMusicDic;
             
         }
         
-        self.num = 0;
-        __weak CLAudioTool *mySelf=self;
     
-       _onlinePlay.onCompletion = ^{
-        
-        [mySelf playModel:NO];
-        
-    };
-        self.onlinePlay.onFailure=^(FSAudioStreamError error,NSString *description){
-            
-            if (mySelf.num==0) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"searchPlayError" object:mySelf userInfo:@{@"description":description}];
-                mySelf.num = 1;
-            }
-            
-            
-        };
-
-    
-      
-
     
     
 }
@@ -384,34 +383,34 @@ static NSMutableDictionary *_onleMusicDic;
             
         }
     
-    __weak CLAudioTool *mySelf = self;
-     _onlinePlay.onCompletion =^{
-        
-        
-        [mySelf playModel:YES];
-        
-    };
-    _onlinePlay.onFailure =^(FSAudioStreamError erro,NSString *description){
-        
-        [[CLMusicSearch searchManager] downloadMusic:[CLMuiscTool getCurrentMusic].songLink successHandler:^(id location, id response, NSString *keyString) {
-            
-            
-            [CLMuiscTool addMusicForPlit:[[CLMuiscTool musicManager] getDonloadMuisc:keyString] withlocation:nil];
-            
-            [CLMuiscTool addMusicForLoaction:[[CLMuiscTool musicManager ] getDonloadMuisc:keyString] withlocation:location];
-            
-            ;
-
-            
-        } andFailHander:^(id response, id erro, NSString *keyString) {
-            
-            
-        } andProgrees:^(int64_t writedData, int64_t totalData) {
-            NSLog(@"---");
-            
-        }];
-        
-    };
+//    __weak CLAudioTool *mySelf = self;
+//     _onlinePlay.onCompletion =^{
+//        
+//        
+//        [mySelf playModel:YES];
+//        
+//    };
+//    _onlinePlay.onFailure =^(FSAudioStreamError erro,NSString *description){
+//        
+//        [[CLMusicSearch searchManager] downloadMusic:[CLMuiscTool getCurrentMusic].songLink successHandler:^(id location, id response, NSString *keyString) {
+//            
+//            
+//            [CLMuiscTool addMusicForPlit:[[CLMuiscTool musicManager] getDonloadMuisc:keyString] withlocation:nil];
+//            
+//            [CLMuiscTool addMusicForLoaction:[[CLMuiscTool musicManager ] getDonloadMuisc:keyString] withlocation:location];
+//            
+//            ;
+//
+//            
+//        } andFailHander:^(id response, id erro, NSString *keyString) {
+//            
+//            
+//        } andProgrees:^(int64_t writedData, int64_t totalData) {
+//            NSLog(@"---");
+//            
+//        }];
+//        
+//    };
     
 }
 
@@ -423,7 +422,10 @@ static NSMutableDictionary *_onleMusicDic;
         
             if (isCirc) {
                 
+                [self stopAudioWithOnlineString:[CLMuiscTool getCurrentMusic].songLink];
+                
                 CLMusicOnBaiDuIcon *music = [CLMuiscTool nextMusic:[CLMuiscTool getCurrentMusic]];
+                
                 [[self playAudioWithOnlineString:music.songLink] play];
                 
             } else {
@@ -438,6 +440,7 @@ static NSMutableDictionary *_onleMusicDic;
         
         
         if (isCirc) {
+            [self stopAudioWithOnlineString:[CLMuiscTool getOnlineCurrentMusic].songLink];
             
            CLMusicOnBaiDuIcon *music = [CLMuiscTool nextOnlineMusic:[CLMuiscTool getOnlineCurrentMusic]];
             [[self playAudioWithOnlineString:music.songLink] play];

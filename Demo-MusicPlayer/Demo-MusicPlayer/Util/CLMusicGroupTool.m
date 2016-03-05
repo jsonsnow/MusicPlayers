@@ -111,7 +111,7 @@ static CLMusicGroupTool *_manager;
         }
         
         if (c<'a'||c> 'z') {
-            NSLog(@"delete");
+            NSLog(@"解析错误歌曲delete");
             continue;
         }
         int index= c-97;
@@ -155,6 +155,11 @@ static CLMusicGroupTool *_manager;
 -(void)addMusicFormRecentPlayArray:(CLMusicOnBaiDuIcon *)music{
     
     
+    BOOL isSucess = [[CLMuiscTool musicManager] addMusicForRecentPlay:music];
+    if (!isSucess) {
+        
+        return ;
+    }
     NSString *nameString = [NSString convertHanZiToPingYing:music.artistName];
     char c= [nameString characterAtIndex:0];
     
@@ -171,8 +176,12 @@ static CLMusicGroupTool *_manager;
     if (0<index && index< 26) {
         
         CLMusicGroup *group = _recentPlayArray[index];
-        [[CLMuiscTool musicManager] addMusicForRecentPlay:music];
-        [group.musicsArray addObject:music];
+        
+        if (isSucess) {
+            
+            [group.musicsArray addObject:music];
+        }
+        
     }
     
     

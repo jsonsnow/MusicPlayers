@@ -41,7 +41,7 @@
     lrcPath = [lrcPath stringByAppendingPathComponent:@"lrc"];
     if (![manager fileExistsAtPath:lrcPath]) {
         
-        [manager createFileAtPath:lrcPath contents:nil attributes:nil];
+        [manager createDirectoryAtPath:lrcPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
     lrcPath = [NSString stringWithFormat:@"/%@.lrc",ID];

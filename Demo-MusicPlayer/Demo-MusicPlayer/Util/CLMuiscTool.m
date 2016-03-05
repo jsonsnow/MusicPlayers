@@ -292,11 +292,11 @@ static CLMuiscTool *_manger;
     
     
     NSString *MUISCPlist = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"music.plist"];
-//    NSFileManager *manager = [NSFileManager defaultManager];
-//    if (![manager fileExistsAtPath:MUISCPlist]) {
-//        
-//        [manager createFileAtPath:MUISCPlist contents:nil attributes:nil];
-//    }
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:MUISCPlist]) {
+        
+        [manager createFileAtPath:MUISCPlist contents:nil attributes:nil];
+    }
     
     NSArray *array = [NSArray arrayWithContentsOfFile:MUISCPlist];
     NSNumber *num;
@@ -411,9 +411,10 @@ static CLMuiscTool *_manger;
             
                 
                 NSDictionary *dic=@{@"artistid":artist.artistid,
-                                    @"artistpic":artist.artistpic?artist.artistpic:@"不存在",
-                                    @"artistname":artist.artistname?artist.artistname:@"不存在",
-                                    @"yyr_artist":artist.yyr_artist?artist.yyr_artist:@"不存在"};
+                                    @"artistpic":artist.artistpic,
+                                    @"artistname":artist.artistname,
+                                    @"yyr_artist":artist.yyr_artist
+                                    };
                 
                 tempArray = @[dic];
                 
@@ -486,20 +487,17 @@ static CLMuiscTool *_manger;
 
     NSDictionary *musicDic   = dic[@"data"][@"songList"][0];
     CLMusicOnBaiDuIcon *music= [[CLMusicOnBaiDuIcon alloc] init];
-    music.songName           = musicDic[@"songName"]?musicDic[@"songName"]:@"不存在";
-    music.songPicSmall       = musicDic[@"songPicSmall"]?musicDic[@"songPicSmall"]:@"不存在";
-    music.songPicBig         = musicDic[@"songPicBig"]?musicDic[@"songPicBig"]:@"不存在";
-    music.songLink           = [self swithcString: musicDic[@"songLink"]]?[self swithcString:
-                                                   musicDic[@"songLink"]]:@"不存在";
+    music.songName           = musicDic[@"songName"];
+    music.songPicSmall       = musicDic[@"songPicSmall"];
+    music.songPicBig         = musicDic[@"songPicBig"];
+    music.songLink           = [self swithcString:musicDic[@"songLink"]];
     
-    music.artistName         = musicDic[@"artistName"]?musicDic[@"artistName"]:@"不存在";
+    music.artistName         = musicDic[@"artistName"];
     music.lrcLink            = [NSString stringWithFormat:
                                @"http://musicdata.baidu.com%@",
-                                musicDic[@"lrcLink"]]?[NSString stringWithFormat:
-                                                       @"http://musicdata.baidu.com%@",
-                                                       musicDic[@"lrcLink"]]:@"不存在";
+                                musicDic[@"lrcLink"]];
     
-    music.songId             =musicDic[@"songId"]?musicDic[@"songId"]:@"不存在";
+    music.songId             =musicDic[@"songId"];
     
     [_searchMuiscArray addObject:music];
     return [_searchMuiscArray copy];
@@ -683,16 +681,17 @@ static CLMuiscTool *_manger;
              
              music.download=YES;
             
-                [self  addDownloadMusic:music];
+                [mySelf  addDownloadMusic:music];
             
                 [[CLMusicSearch searchManager] downloadMusic:music.songLink successHandler:^(NSString * location, id response, NSString *keyString) {
                     
                     [CLMuiscTool addMusicForPlit:[mySelf getDonloadMuisc:keyString] withlocation:nil];
-                    
-                    [CLMuiscTool addMusicForLoaction:[mySelf getDonloadMuisc:keyString] withlocation:location];
                     [mySelf addMusicForRecentPlay:[mySelf getDonloadMuisc:keyString]];
                     ;
                     [[CLMusicGroupTool managerGroup] addMusicFromOnceGroup:[mySelf getDonloadMuisc:keyString]];
+                    
+                    [CLMuiscTool addMusicForLoaction:[mySelf getDonloadMuisc:keyString] withlocation:location];
+                   
 
                     [mySelf deleteFailureMusic:keyString];
                     
@@ -972,7 +971,7 @@ static CLMuiscTool *_manger;
     
     return  [dateArray copy];
 }
--(void)addMusicForRecentPlay:(CLMusicOnBaiDuIcon *)music{
+-(BOOL)addMusicForRecentPlay:(CLMusicOnBaiDuIcon *)music{
     
     music.playDate = [NSDate dateWithTimeIntervalSinceNow:0];
    
@@ -981,7 +980,10 @@ static CLMuiscTool *_manger;
     if (![self.recentPlayArray containsObject:music]&& music) {
         
           [self.recentPlayArray addObject:music];
+        return YES;
     }
+    
+    return NO;
     
   
 }
