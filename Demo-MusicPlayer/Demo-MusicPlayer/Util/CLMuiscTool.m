@@ -302,12 +302,15 @@ static CLMuiscTool *_manger;
     
     NSArray *array = [NSArray arrayWithContentsOfFile:MUISCPlist];
     NSNumber *num;
+    NSNumber *numSearch;
     if (!music.isSearchMusic) {
         
       num=[NSNumber numberWithBool:music.download];
+      numSearch = [NSNumber numberWithBool:NO];
         
     } else {
         
+        numSearch = [NSNumber numberWithBool:YES];
         num = [NSNumber numberWithBool:YES];
         
 //        NSString *savePath =[[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)firstObject] stringByAppendingPathComponent:@"music"];
@@ -329,7 +332,7 @@ static CLMuiscTool *_manger;
                         @"artistName":music.artistName,
                         @"download":num,
                         @"playDate":music.playDate,
-                        @"searchMusic":num
+                        @"searchMusic":numSearch
                         };
     
     NSMutableArray *marray;

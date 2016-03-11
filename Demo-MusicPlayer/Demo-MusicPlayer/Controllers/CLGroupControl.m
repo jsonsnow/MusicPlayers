@@ -55,7 +55,7 @@
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"isFirstSearch"];
+    [defaults setBool:NO forKey:@"isFirstSearch"];
     [defaults synchronize];
     BOOL firstSearch = [defaults boolForKey:@"isFirstSearch"];
     if (firstSearch) {
