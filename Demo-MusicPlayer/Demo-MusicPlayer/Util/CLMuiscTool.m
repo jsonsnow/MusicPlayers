@@ -42,6 +42,7 @@ static CLMuiscTool *_manger;
 @interface CLMuiscTool ()
 @property (nonatomic,strong) NSString *musicPath;
 @property (nonatomic,strong) NSMutableArray *recentPlayArray;
+@property (nonatomic,strong) NSMutableArray *searchLocalMusicArray;
 
 
 
@@ -103,7 +104,7 @@ static CLMuiscTool *_manger;
         _downloadMusicDic  = [NSMutableDictionary dictionary];
         _muicArrayFromFile = [NSMutableArray array];
         _recentPlayArray   = [NSMutableArray array];
-     
+        _searchLocalMusicArray = [NSMutableArray array];
         
         
     }
@@ -309,16 +310,16 @@ static CLMuiscTool *_manger;
         
         num = [NSNumber numberWithBool:YES];
         
-        NSString *savePath =[[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)firstObject] stringByAppendingPathComponent:@"music"];
-        savePath = [NSString stringWithFormat:@"%@/%@",savePath,music.songId];
-        music.songLink = savePath ;
+//        NSString *savePath =[[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)firstObject] stringByAppendingPathComponent:@"music"];
+//        savePath = [NSString stringWithFormat:@"%@/%@",savePath,music.songId];
+//        music.songLink = savePath ;
     }
     
     if (music.playDate == nil) {
         
         music.playDate = [NSDate dateWithTimeIntervalSince1970:0];
     }
-    
+
     NSDictionary *dic=@{
                         @"songPicSmall":music.songPicSmall,
                         @"songPicBig":music.songPicBig,
@@ -327,7 +328,8 @@ static CLMuiscTool *_manger;
                         @"songId":music.songId,
                         @"artistName":music.artistName,
                         @"download":num,
-                        @"playDate":music.playDate
+                        @"playDate":music.playDate,
+                        @"searchMusic":num
                         };
     
     NSMutableArray *marray;
@@ -365,9 +367,15 @@ static CLMuiscTool *_manger;
     }
     
     savePath =[NSString stringWithFormat:@"%@/%@.mp3",savePath, music.songId];
-    [data writeToFile:savePath atomically:YES];
-    [write closeFile];
-    data=nil;
+//    NSError *error = nil;
+//    [fileManager copyItemAtPath:filePath toPath:savePath error:&error];
+//    if (error) {
+//        
+//        NSLog(@"copy error:%@",error.userInfo);
+//    }
+     [data writeToFile:savePath atomically:YES];
+      [write closeFile];
+     data=nil;
     [_downloadMusicDic removeObjectForKey:music.songLink];
     
     
@@ -873,44 +881,78 @@ static CLMuiscTool *_manger;
             }
         
     }
-        
-        CLMusicOnBaiDuIcon *music = [CLMusicOnBaiDuIcon new];
-        music.songId      = [NSString stringWithFormat:@"%04d",arc4random()];
         if (!retDic[@"artist"]||!retDic[@"title"]) {
             
-            NSArray *array   = [filePath.lastPathComponent componentsSeparatedByString:@"-"];
-            if (array.count==0) {
-                
-                music.artistName = @"errorArtistName";
-                music.songName   = @"errorSongName";
-                
-            } else {
-                
-                music.artistName = array[0];
-                music.songName   = array[1];
-
-            }
-            
-        } else {
-            
-            music.artistName  = retDic[@"artist"];
-            music.songName    = retDic[@"title"];
+            return ;
         }
+        CLMusicOnBaiDuIcon *music = [CLMusicOnBaiDuIcon new];
+        music.songId      = [NSString stringWithFormat:@"%04d",arc4random()];
+//        if (!retDic[@"artist"]||!retDic[@"title"]) {
+//            
+//            NSArray *array   = [filePath.lastPathComponent componentsSeparatedByString:@"-"];
+//            if (array.count==0) {
+//                
+//                music.artistName = @"errorArtistName";
+//                music.songName   = @"errorSongName";
+//                
+//            } else {
+//                
+//                music.artistName = array[0];
+//                music.songName   = array[1];
+//
+//            }
+//            
+//        } else {
+//            
+//            music.artistName  = retDic[@"artist"];
+//            music.songName    = retDic[@"title"];
+//        }
    
         //NSLog(@"%@",music.artistName);
-        
+        music.artistName   = retDic[@"artist"];
+        music.songName     = retDic[@"title"];
         music.songLink     = filePath;
+        NSLog(@"searchPath:%@",filePath);
         music.searchMusic  = YES;
         music.songPicBig   = @"music";
         music.songPicSmall = @"music";
         music.lrcLink      = @"music";
-        [_muicArrayFromFile addObject:music];
+        music.searchMusic  = YES;
         [retDic removeAllObjects];
         retDic = nil;
         mp3    = nil;
-        [CLMuiscTool addMusicForLoaction:music withlocation:music.songLink];
-        [CLMuiscTool addMusicForPlit:music withlocation:music.songLink];
-      
+        if (_muicArrayFromFile.count == 0) {
+            
+            
+            //[CLMuiscTool addMusicForLoaction:music withlocation:music.songLink];
+            [CLMuiscTool addMusicForPlit:music withlocation:music.songLink];
+            
+
+            
+        } else {
+            
+            NSUInteger index = 0;
+            for (CLMusicOnBaiDuIcon *tempMusic in _muicArrayFromFile) {
+               
+                if ([tempMusic.songName isEqualToString: music.songName]) {
+                    
+                   
+                    break;
+                    
+                    
+                }
+                 index ++;
+            }
+            
+            if (index == _muicArrayFromFile.count ) {
+                
+                //[_muicArrayFromFile addObject:music];
+                [CLMuiscTool addMusicForPlit:music withlocation:music.songLink];
+               // [CLMuiscTool addMusicForLoaction:music withlocation:music.songLink];
+            }
+
+        }
+        
         
 }
 
@@ -940,9 +982,8 @@ static CLMuiscTool *_manger;
         
         
         if ([mp3String.pathExtension isEqualToString:@"mp3"]||[mp3String.pathExtension isEqualToString:@"m4a"] ) {
-            NSLog(@"add");
             
-          // [self getid3Message:[searchPath stringByAppendingPathComponent:mp3String]];
+          [self getid3Message:[searchPath stringByAppendingPathComponent:mp3String]];
         }
     }
 

@@ -138,9 +138,11 @@ static NSMutableDictionary *_onleMusicDic;
             
             if (music.isSearchMusic) {
                 
+                NSLog(@"%@",music.songLink);
                 _onlinePlay = [[FSAudioStream alloc] initWithUrl:[NSURL fileURLWithPath:music.songLink]];
                 
             } else {
+            
                 
                  _onlinePlay  =[[FSAudioStream alloc] initWithUrl:[NSURL fileURLWithPath:[CLMuiscTool getLocatPath:music]]];
                

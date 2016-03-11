@@ -31,7 +31,7 @@
     
     if (!_searchPath) {
         
-        _searchPath =@"Users/Aspmcll";
+        _searchPath =@"/Users/cll/Desktop";
     }
     
     return _searchPath;
@@ -56,7 +56,8 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:YES forKey:@"isFirstSearch"];
-    BOOL firstSearch = ![defaults boolForKey:@"isFirstSearch"];
+    [defaults synchronize];
+    BOOL firstSearch = [defaults boolForKey:@"isFirstSearch"];
     if (firstSearch) {
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -66,7 +67,7 @@
                 
                 self.lcoalMusicNum.text = [NSString stringWithFormat:
                                            @"%ld首",(unsigned long)[[CLMuiscTool musicManager] musicArray].count];
-                [defaults setBool:YES forKey:@"isFirstSearch"];
+                [defaults setBool:NO forKey:@"isFirstSearch"];
                 
             });
             

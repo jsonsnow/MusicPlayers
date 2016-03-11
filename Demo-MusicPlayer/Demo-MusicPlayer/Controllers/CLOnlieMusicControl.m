@@ -87,7 +87,7 @@
     [self downloadLrc];
     
     [self createTimerForCurrentButton];
-    [self creatLrcTimer];
+   // [self creatLrcTimer];
 
     
 }

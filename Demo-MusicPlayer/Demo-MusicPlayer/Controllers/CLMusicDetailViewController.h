@@ -11,7 +11,7 @@
 
 typedef void(^MyBlock)(BOOL);
 @interface CLMusicDetailViewController : UIViewController
-@property (nonatomic,strong)CLMusic *music;
+
 @property (nonatomic,copy) MyBlock showViewWhenCallBack;
 @property (nonatomic,strong) NSString *remoteRul;
 @property (nonatomic,strong) NSString *imageUrl;
