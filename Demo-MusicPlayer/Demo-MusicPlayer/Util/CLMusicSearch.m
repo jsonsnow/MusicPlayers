@@ -210,7 +210,10 @@ static CLMusicSearch *_manager;
     
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
     NSURLSessionDownloadTask *task=[[NSURLSession sharedSession] downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+        if (error) {
+            
+            NSLog(@"歌词搜索错误");
+        }
         NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse *)response;
         if (httpResponse.statusCode==200) {
             

@@ -55,9 +55,9 @@
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:NO forKey:@"isFirstSearch"];
-    [defaults synchronize];
-    BOOL firstSearch = [defaults boolForKey:@"isFirstSearch"];
+  //  [defaults setBool:YES forKey:@"isFirstSearch"];
+  //  [defaults synchronize];
+    BOOL firstSearch = ![defaults boolForKey:@"isFirstSearch"];
     if (firstSearch) {
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -67,7 +67,7 @@
                 
                 self.lcoalMusicNum.text = [NSString stringWithFormat:
                                            @"%ld首",(unsigned long)[[CLMuiscTool musicManager] musicArray].count];
-                [defaults setBool:NO forKey:@"isFirstSearch"];
+                [defaults setBool:YES forKey:@"isFirstSearch"];
                 
             });
             
@@ -85,7 +85,7 @@
     self.lcoalMusicNum.text = [NSString stringWithFormat:
                                @"%ld首",(unsigned long)[[CLMuiscTool musicManager] musicArray].count];
     NSArray *array = [[CLMuiscTool musicManager] getAllDownloadMusic];
-    self.downloadingMusic.text = [NSString stringWithFormat:@"%ld首音乐正在下载",(unsigned long)array.count];
+     self.downloadingMusic.text = [NSString stringWithFormat:@"%ld首音乐正在下载",(unsigned long)array.count];
     
     self.recentPlayMusicCount.text = [NSString stringWithFormat:@"%ld首",(unsigned long)[[CLMuiscTool musicManager] getRecentPlayMusic].count];
     self.tabBarController.tabBar.hidden=NO;

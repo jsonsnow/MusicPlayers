@@ -124,7 +124,7 @@
 -(void)downloadLrc{
     
     self.lrcLines = [CLCachDataTool getLrcForCachWith:_onlieMuisc.songId];
-    if (self.lrcLines.count==0) {
+    if (self.lrcLines.count == 0||self.lrcLines == NULL) {
         
         [CLMusicSearch downloadLrc:[NSURL URLWithString: _onlieMuisc.lrcLink] completionHandler:^(id objct, id erro) {
             
