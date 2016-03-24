@@ -207,7 +207,7 @@ static CLMusicSearch *_manager;
 //下载歌词
 +(void)downloadLrc:(NSURL *)url  completionHandler:(void(^)(id objct, id erro))complete{
     
-    
+    NSLog(@"%@",url);
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
     NSURLSessionDownloadTask *task=[[NSURLSession sharedSession] downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {

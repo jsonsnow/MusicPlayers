@@ -126,7 +126,12 @@
     self.lrcLines = [CLCachDataTool getLrcForCachWith:_onlieMuisc.songId];
     if (self.lrcLines.count == 0||self.lrcLines == NULL) {
         
-        [CLMusicSearch downloadLrc:[NSURL URLWithString: _onlieMuisc.lrcLink] completionHandler:^(id objct, id erro) {
+        if ([_onlieMuisc.lrcLink componentsSeparatedByString:@"//"].count > 2) {
+            
+           _onlieMuisc.lrcLink = [_onlieMuisc.lrcLink substringFromIndex:26];
+            
+        }
+        [CLMusicSearch downloadLrc:[NSURL URLWithString:_onlieMuisc.lrcLink] completionHandler:^(id objct, id erro) {
             
             NSURL *url=objct;
             self.lrcLines= [CLLyric lrcLinesWithFileName:url];

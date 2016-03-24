@@ -332,7 +332,8 @@ static CLMuiscTool *_manger;
                         @"artistName":music.artistName,
                         @"download":num,
                         @"playDate":music.playDate,
-                        @"searchMusic":numSearch
+                        @"searchMusic":numSearch,
+                        @"lrcLink":[music.lrcLink substringFromIndex:26]
                         };
     
     NSMutableArray *marray;
@@ -505,9 +506,7 @@ static CLMuiscTool *_manger;
     music.songLink           = [self swithcString:musicDic[@"songLink"]];
     
     music.artistName         = musicDic[@"artistName"];
-    music.lrcLink            = [NSString stringWithFormat:
-                               @"http://musicdata.baidu.com%@",
-                                musicDic[@"lrcLink"]];
+    music.lrcLink            = musicDic[@"lrcLink"];
     
     music.songId             =musicDic[@"songId"];
     
@@ -552,15 +551,13 @@ static CLMuiscTool *_manger;
     
     NSDictionary *musicDic   = dic[@"data"][@"songList"][0];
     CLMusicOnBaiDuIcon *music=[[CLMusicOnBaiDuIcon alloc] init];
-    music.songName           =musicDic[@"songName"];
-    music.songPicSmall       =musicDic[@"songPicSmall"];
-    music.songPicBig         =musicDic[@"songPicBig"];
+    music.songName           = musicDic[@"songName"];
+    music.songPicSmall       = musicDic[@"songPicSmall"];
+    music.songPicBig         = musicDic[@"songPicBig"];
     music.songLink           = [self swithcString: musicDic[@"songLink"]];
-    music.artistName         =musicDic[@"artistName"];
-    music.lrcLink            =[NSString stringWithFormat:
-                               @"http://musicdata.baidu.com%@",
-                               musicDic[@"lrcLink"]];
-    music.songId             =musicDic[@"songId"];
+    music.artistName         = musicDic[@"artistName"];
+    music.lrcLink            = musicDic[@"lrcLink"];
+    music.songId             = musicDic[@"songId"];
     
     [_searchMuiscArray addObject:music];
     return [_searchMuiscArray copy];
